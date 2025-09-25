@@ -1,13 +1,17 @@
 ---
-title: "About"
-image: profile.jpg
+title: "About Me"
+image: author.jpg
 about:
   template: jolla
   links:
     - icon: github
       text: Github
-      href: https://github.com/etc5523-2022
+      href: https://github.com/apra0095
+    - icon: file-textgit dtat
+      text: CV
+      href: https://www.linkedin.com/in/aji-pratama-0b8508180/
 
 ---
 
-This is a blog template for the ETC5523 Communicating with Data assessment at Monash University.
+Hi, I’m **Izzul Fattah Aji Pratama (Aji)**, a Master of Business Analytics student at **Monash University** with a 3+ years experience in FMCG analytics & commercial at **NielsenIQ** and **Philip Morris International**.  
+I enjoy turning messy data into clear decisions and visuals. 
