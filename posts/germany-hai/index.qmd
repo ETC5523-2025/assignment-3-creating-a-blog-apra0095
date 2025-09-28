@@ -1,0 +1,20 @@
+---
+title: "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?"
+author: "Izzul Fattah Aji Pratama"
+date: 2025-09-24
+categories: [Germany, HAI, burden, DALYs]
+bibliography: references.bib
+toc: true
+---
+
+## Problem
+Healthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.
+
+The fundamental question is: How big is Germany's HAI burden compared with EU/EEA average and what infection type drives it?
+
+## Data
+**Source:** ECDC Point Prevalence Survey 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI)  with 46 hospitals and  9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA 
+**Variables:** Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs. 
+**Method:** The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.
+
+

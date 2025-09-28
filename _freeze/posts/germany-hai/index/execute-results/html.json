@@ -1,0 +1,17 @@
+{
+  "hash": "54f80018d0d1d02646450c41b1960857",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?\"\nauthor: \"Izzul Fattah Aji Pratama\"\ndate: 2025-09-24\ncategories: [Germany, HAI, burden, DALYs]\nbibliography: references.bib\ntoc: true\n---\n\n## Problem\nHealthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.\n\nThe fundamental question is: How big is Germany's HAI burden compared with EU/EEA average and what infection type drives it?\n\n## Data\n**Source:** ECDC Point Prevalence Survey 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI)  with 46 hospitals and  9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA \n**Variables:** Infection type, age, sex; outcomes: incidence, DALYs, deaths.  \n**Method:** Prevalence → incidence via modified Rhame–Sudderth; DALYs = YLL + YLD; infection-specific fatality probabilities. German McCabe severity unavailable; EU/EEA distribution used as proxy (adds uncertainty). :contentReference[oaicite:4]{index=4}\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr); library(ggplot2); library(tibble); library(knitr)\n\n# Headline national totals (from Assignment 2)\ncases  <- 478222\ndeaths <- 16245\ndalys  <- 248920\n\n# Per-100k rates (from Assignment 2)\nhai_rates <- tribble(\n  ~region,   ~dalys_per_100k, ~deaths_per_100k,\n  \"Germany\", 308.2,           20.1,\n  \"EU/EEA\",  290.0,           NA_real_\n)\n\n# Composition (from Assignment 2): HAP+BSI vs UTI vs others\nburden <- tribble(\n  ~infection,       ~cases_share, ~dalys_share,\n  \"HAP + BSI\",      \"28%\",        \"51%\",\n  \"UTI\",            \"45%\",        \"27%\",\n  \"Other (CDI+SSI)\",\"27%\",        \"22%\"\n)\n```\n:::\n\n\n## Analysis\nGermany’s DALY rate is **308.2 per 100,000** vs **290.0** in the EU/EEA (@fig-dalys).  \nCompositionally, **HAP+BSI** produce **51% of DALYs from 28% of cases**, while **UTI** accounts for **45% of cases but 27% of DALYs** (@tbl-burden). :contentReference[oaicite:5]{index=5}\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(hai_rates, aes(region, dalys_per_100k)) +\n  geom_col(width = 0.6) +\n  geom_text(aes(label = dalys_per_100k), vjust = -0.5) +\n  labs(x = NULL, y = \"DALYs per 100,000\")\n```\n\n::: {.cell-output-display}\n![DALYs per 100,000: Germany vs EU/EEA (2011–2012).](index_files/figure-html/fig-dalys-1.png){#fig-dalys width=672}\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

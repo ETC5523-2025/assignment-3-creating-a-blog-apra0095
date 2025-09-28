@@ -14,4 +14,4 @@ about:
 ---
 
 Hi, I’m **Izzul Fattah Aji Pratama (Aji)**, a Master of Business Analytics student at **Monash University** with a 3+ years experience in FMCG analytics & commercial at **NielsenIQ** and **Philip Morris International**.  
-I enjoy turning messy data into clear decisions and visuals. 
+I enjoy turning messy data into clear decisions and visuals. On this site I share concise, well-documented analyses you can reuse and learn from.

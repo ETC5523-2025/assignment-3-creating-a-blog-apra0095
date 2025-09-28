@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "Hi, I’m Izzul Fattah Aji Pratama (Aji), a Master of Business Analytics student at Monash University with a 3+ years experience in FMCG analytics & commercial at NielsenIQ and Philip Morris International.\nI enjoy turning messy data into clear decisions and visuals."
+    "text": "Hi, I’m Izzul Fattah Aji Pratama (Aji), a Master of Business Analytics student at Monash University with a 3+ years experience in FMCG analytics & commercial at NielsenIQ and Philip Morris International.\nI enjoy turning messy data into clear decisions and visuals. On this site I share concise, well-documented analyses you can reuse and learn from."
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -18,6 +18,34 @@
     "href": "index.html",
     "title": "ETC5523 Blog Assessment",
     "section": "",
-    "text": "Welcome To My Blog Template\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJul 18, 2022\n\n\nEmi Tanaka\n\n\n\n\n\nNo matching items"
+    "text": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?\n\n\n\nGermany\n\nHAI\n\nburden\n\nDALYs\n\n\n\n\n\n\n\n\n\nSep 24, 2025\n\n\nIzzul Fattah Aji Pratama\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog Template\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJul 18, 2022\n\n\nEmi Tanaka\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/germany-hai/index.html",
+    "href": "posts/germany-hai/index.html",
+    "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
+    "section": "",
+    "text": "Healthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.\nThe fundamental question is: How big is Germany’s HAI burden compared with EU/EEA average and what infection type drives it?"
+  },
+  {
+    "objectID": "posts/germany-hai/index.html#problem",
+    "href": "posts/germany-hai/index.html#problem",
+    "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
+    "section": "",
+    "text": "Healthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.\nThe fundamental question is: How big is Germany’s HAI burden compared with EU/EEA average and what infection type drives it?"
+  },
+  {
+    "objectID": "posts/germany-hai/index.html#data",
+    "href": "posts/germany-hai/index.html#data",
+    "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
+    "section": "Data",
+    "text": "Data\nSource: ECDC Point Prevalence Survey 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI) with 46 hospitals and 9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA Variables: Infection type, age, sex; outcomes: incidence, DALYs, deaths.\nMethod: Prevalence → incidence via modified Rhame–Sudderth; DALYs = YLL + YLD; infection-specific fatality probabilities. German McCabe severity unavailable; EU/EEA distribution used as proxy (adds uncertainty). :contentReferenceoaicite:4\n\nlibrary(dplyr); library(ggplot2); library(tibble); library(knitr)\n\n# Headline national totals (from Assignment 2)\ncases  &lt;- 478222\ndeaths &lt;- 16245\ndalys  &lt;- 248920\n\n# Per-100k rates (from Assignment 2)\nhai_rates &lt;- tribble(\n  ~region,   ~dalys_per_100k, ~deaths_per_100k,\n  \"Germany\", 308.2,           20.1,\n  \"EU/EEA\",  290.0,           NA_real_\n)\n\n# Composition (from Assignment 2): HAP+BSI vs UTI vs others\nburden &lt;- tribble(\n  ~infection,       ~cases_share, ~dalys_share,\n  \"HAP + BSI\",      \"28%\",        \"51%\",\n  \"UTI\",            \"45%\",        \"27%\",\n  \"Other (CDI+SSI)\",\"27%\",        \"22%\"\n)"
+  },
+  {
+    "objectID": "posts/germany-hai/index.html#analysis",
+    "href": "posts/germany-hai/index.html#analysis",
+    "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
+    "section": "Analysis",
+    "text": "Analysis\nGermany’s DALY rate is 308.2 per 100,000 vs 290.0 in the EU/EEA (Figure 1).\nCompositionally, HAP+BSI produce 51% of DALYs from 28% of cases, while UTI accounts for 45% of cases but 27% of DALYs (?@tbl-burden). :contentReferenceoaicite:5\n\nggplot(hai_rates, aes(region, dalys_per_100k)) +\n  geom_col(width = 0.6) +\n  geom_text(aes(label = dalys_per_100k), vjust = -0.5) +\n  labs(x = NULL, y = \"DALYs per 100,000\")\n\n\n\n\n\n\n\nFigure 1: DALYs per 100,000: Germany vs EU/EEA (2011–2012)."
   }
 ]
