@@ -13,8 +13,80 @@ Healthcare-associated infections (HAIs) remained a major burden on hospital syst
 The fundamental question is: How big is Germany's HAI burden compared with EU/EEA average and what infection type drives it?
 
 ## Data
-**Source:** ECDC Point Prevalence Survey 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI)  with 46 hospitals and  9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA 
+**Source:** ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI)  with 46 hospitals and  9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA 
 **Variables:** Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs. 
 **Method:** The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.
+
+## Analysis
+Using Germany 2011 PPS, the problem was revealed, there were 478,222 HAI cases, resulting 16,245 attributable deaths and 248,920 DALYs. Adjusted to per 100,000 population sizes, Germany carried 308.2 DALYs and 20.1 deaths. Compared with EU/EEA, the average DALYs were 290 and 15.3 attributable deaths as shown in @fig-rates. This showed that Germany has higher infection burden compared to the region.
+
+```{r}
+#| label: HAI Rates
+#| include: false
+library(tidyverse)
+
+hai_rates <- tribble(
+  ~region,   ~metric,          ~value,
+  "Germany", "DALYs per 100k", 308.2,
+  "Germany", "Deaths per 100k",20.1,
+  "EU/EEA",  "DALYs per 100k", 290.0 ,
+  "EU/EEA",  "Deaths per 100k",15.3
+)
+```
+
+```{r}
+#| label: fig-rates
+#| echo: false
+#| fig-cap: Germany vs EU/EEA DALY and Death per 100k Population
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 5
+
+ggplot(hai_rates, aes(x=region, y=value, fill=region)) +
+  geom_col(width=0.6) +
+  geom_text(aes(label=value), vjust=1.5) +
+  facet_wrap(~metric, ncol=2, scales="free_y") +
+  labs( title = "Germany vs EU/EEA: DALY and Death Rate",
+    x="Country", y="Per 100,000 people") +
+  theme(
+    plot.title       = element_text(size = 14, face = "bold"),
+    axis.title.x     = element_text(size = 12, face = "bold"),
+    axis.title.y     = element_text(size = 12, face = "bold"),
+    axis.text.x      = element_text(size = 12, angle = 0, vjust = 1),
+    axis.text.y      = element_text(size = 12),
+    strip.text       = element_text(size = 10, face = "bold"),
+    legend.text      = element_text(size = 12),
+    legend.title     = element_text(size = 10),
+    aspect.ratio     = 1 )
+```
+Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs
+
+```{r}
+cases <- tribble(
+~infection, ~count,
+  "HAP", 106586,
+  "SSI",  93222,
+  "BSI",  26976,
+  "UTI", 214150,
+  "CDI",  36002
+)
+
+daly <- tribble(
+~infection, ~count,
+  "HAP", 69508,
+  "SSI", 28842,
+  "BSI", 58350,
+  "UTI", 66701,
+  "CDI", 20890
+)
+
+total_cases <- 478222
+total_dalys <- 248920
+
+```
+
+
+
+
 
 
