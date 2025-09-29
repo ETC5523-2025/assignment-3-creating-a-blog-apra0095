@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,6 +104,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -170,7 +207,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p><strong>Source:</strong> ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI) with 46 hospitals and 9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA <strong>Variables:</strong> Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs. <strong>Method:</strong> The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.</p>
+<ul>
+<li><p><strong>Source:</strong> ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI) with 46 hospitals and 9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA</p></li>
+<li><p><strong>Variables:</strong> Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs.</p></li>
+<li><p><strong>Method:</strong> The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.</p></li>
+</ul>
 </section>
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
@@ -187,6 +228,157 @@ Figure&nbsp;1: Germany vs EU/EEA DALY and Death per 100k Population
 </figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs as shown in <a href="#fig-shares" class="quarto-xref">Figure&nbsp;2</a> . This shows that the most severe infections are not necessarily the most frequent that happened.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-shares" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-shares-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Share of cases vs DALYs by infection type (Germany, 2011)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>breakdown <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type_of_HAI =</span> <span class="fu">c</span>(<span class="st">"HAP"</span>, <span class="st">"SSI"</span>, <span class="st">"BSI"</span>, <span class="st">"UTI"</span>, <span class="st">"CDI"</span>, <span class="st">"All"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_HAI =</span> <span class="fu">c</span>(<span class="st">"106,586 (83,618–137,476)"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"93,222 (75,369–114,241)"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"26,976 (16,520–42,252)"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"214,150 (175,086–253,524)"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"36,002 (25,108–49,934)"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"478,222 (421,350–537,787)"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_attributable_deaths =</span> <span class="fu">c</span>(<span class="st">"3,968 (1,107–8,164)"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"2,328 (1,888–2,882)"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"3,905 (2,004–6,987)"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"3,664 (1,462–7,533)"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"1,917 (112–4,547)"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"16,245 (10,863–22,756)"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_DALYs =</span> <span class="fu">c</span>(<span class="st">"69,508 (34,042–117,232)"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"28,842 (23,313–35,303)"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"58,350 (30,940–104,227)"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"66,701 (27,890–128,543)"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"20,890 (2,023–49,443)"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"248,920 (178,693–336,239)"</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_YLLs =</span> <span class="fu">c</span>(<span class="st">"41,306 (11,475–84,483)"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"28,376 (22,983–34,714)"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"49,578 (25,499–90,816)"</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"44,871 (18,043–92,915)"</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"19,937 (1,166–47,973)"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"190,245 (131,301–264,573)"</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_YLDs =</span> <span class="fu">c</span>(<span class="st">"27,539 (16,528–42,824)"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"452 (352–580)"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"8,787 (4,463–16,609)"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"20,243 (8,095–40,522)"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"977 (172–2,125)"</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"59,076 (40,263–84,578)"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breakdown) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Type of HAI"</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of HAIs"</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of attributable deaths"</span>,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of DALYs"</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of YLLs"</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of YLDs"</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>breakdown <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">kable</span>(<span class="st">"html"</span>, <span class="at">align =</span> <span class="st">"lrrrrr"</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">TRUE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="fu">nrow</span>(breakdown), <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#f2f2f2"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-breakdown" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-breakdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Burden of healthcare-associated infections by type, Germany PPS 2011
+</figcaption>
+<div aria-describedby="tbl-breakdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped table-hover do-not-create-environment cell caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type of HAI</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of HAIs</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of attributable deaths</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of DALYs</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of YLLs</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number of YLDs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">HAP</td>
+<td style="text-align: right;">106,586 (83,618–137,476)</td>
+<td style="text-align: right;">3,968 (1,107–8,164)</td>
+<td style="text-align: right;">69,508 (34,042–117,232)</td>
+<td style="text-align: right;">41,306 (11,475–84,483)</td>
+<td style="text-align: right;">27,539 (16,528–42,824)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">SSI</td>
+<td style="text-align: right;">93,222 (75,369–114,241)</td>
+<td style="text-align: right;">2,328 (1,888–2,882)</td>
+<td style="text-align: right;">28,842 (23,313–35,303)</td>
+<td style="text-align: right;">28,376 (22,983–34,714)</td>
+<td style="text-align: right;">452 (352–580)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">BSI</td>
+<td style="text-align: right;">26,976 (16,520–42,252)</td>
+<td style="text-align: right;">3,905 (2,004–6,987)</td>
+<td style="text-align: right;">58,350 (30,940–104,227)</td>
+<td style="text-align: right;">49,578 (25,499–90,816)</td>
+<td style="text-align: right;">8,787 (4,463–16,609)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">UTI</td>
+<td style="text-align: right;">214,150 (175,086–253,524)</td>
+<td style="text-align: right;">3,664 (1,462–7,533)</td>
+<td style="text-align: right;">66,701 (27,890–128,543)</td>
+<td style="text-align: right;">44,871 (18,043–92,915)</td>
+<td style="text-align: right;">20,243 (8,095–40,522)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">CDI</td>
+<td style="text-align: right;">36,002 (25,108–49,934)</td>
+<td style="text-align: right;">1,917 (112–4,547)</td>
+<td style="text-align: right;">20,890 (2,023–49,443)</td>
+<td style="text-align: right;">19,937 (1,166–47,973)</td>
+<td style="text-align: right;">977 (172–2,125)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important; font-weight: bold;">All</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important;">478,222 (421,350–537,787)</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important;">16,245 (10,863–22,756)</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important;">248,920 (178,693–336,239)</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important;">190,245 (131,301–264,573)</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: rgba(242, 242, 242, 255) !important;">59,076 (40,263–84,578)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
 </div>
 </div>
 

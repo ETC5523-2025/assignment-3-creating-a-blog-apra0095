@@ -8,16 +8,21 @@ toc: true
 ---
 
 ## Problem
+
 Healthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.
 
 The fundamental question is: How big is Germany's HAI burden compared with EU/EEA average and what infection type drives it?
 
 ## Data
-**Source:** ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI)  with 46 hospitals and  9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA 
-**Variables:** Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs. 
-**Method:** The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.
+
+-   **Source:** ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI) with 46 hospitals and 9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA
+
+-   **Variables:** Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs.
+
+-   **Method:** The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.
 
 ## Analysis
+
 Using Germany 2011 PPS, the problem was revealed, there were 478,222 HAI cases, resulting 16,245 attributable deaths and 248,920 DALYs. Adjusted to per 100,000 population sizes, Germany carried 308.2 DALYs and 20.1 deaths. Compared with EU/EEA, the average DALYs were 290 and 15.3 attributable deaths as shown in @fig-rates. This showed that Germany has higher infection burden compared to the region.
 
 ```{r}
@@ -59,9 +64,14 @@ ggplot(hai_rates, aes(x=region, y=value, fill=region)) +
     legend.title     = element_text(size = 10),
     aspect.ratio     = 1 )
 ```
-Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs
+
+Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs as shown in @fig-shares . This shows that the most severe infections are not necessarily the most frequent that happened.
 
 ```{r}
+#| label: Count DALY and Cases
+#| message: false
+#| warning: false
+#| include: false
 cases <- tribble(
 ~infection, ~count,
   "HAP", 106586,
@@ -82,11 +92,104 @@ daly <- tribble(
 
 total_cases <- 478222
 total_dalys <- 248920
+```
 
+```{r}
+#| label: Build DALY and Cases Shares
+#| include: false
+shares <- bind_rows(
+  cases  %>% mutate(metric = "Share of cases", pct = 100 * count / total_cases),
+  daly  %>% mutate(metric = "Share of DALYs", pct = 100 * count / total_dalys)
+) %>%
+  mutate(label = sprintf("%.1f%%", pct),
+         infection = factor(infection, levels = c("UTI","HAP","BSI","SSI","CDI")))
+```
+
+```{r}
+#| label: fig-shares
+#| echo: false
+#| fig-cap: Share of cases vs DALYs by infection type (Germany, 2011)
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 4
+ggplot(shares, aes(infection, pct, fill = metric)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = label),
+            position = position_dodge(width = 0.9), vjust = -0.5, size = 4) +
+  facet_wrap(~ metric, ncol = 2, scales = "free_y") + 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +  
+  labs( title = "Share of Cases vs Share of DALYs",
+x = "Infection Type", y = "Share (%)") +
+  theme(plot.title       = element_text(size = 14, face = "bold"),
+    axis.title.x     = element_text(size = 12, face = "bold"),
+    axis.title.y     = element_text(size = 12, face = "bold"),
+    axis.text.x      = element_text(size = 12, angle = 0, vjust = 1),
+    axis.text.y      = element_text(size = 12),
+    strip.text       = element_text(size = 10, face = "bold"),
+    legend.position = "none",
+    aspect.ratio     = 1)
+```
+
+```{r}
+#| label: Breakdown Infection Number
+#| include: false
+breakdown <- data.frame(
+  
+  type_of_HAI = c("HAP", "SSI", "BSI", "UTI", "CDI", "All"),
+  
+  number_of_HAI = c("106,586 (83,618–137,476)",
+                       "93,222 (75,369–114,241)",
+                       "26,976 (16,520–42,252)",
+                       "214,150 (175,086–253,524)",
+                       "36,002 (25,108–49,934)",
+                       "478,222 (421,350–537,787)"),
+  number_of_attributable_deaths = c("3,968 (1,107–8,164)",
+                                      "2,328 (1,888–2,882)",
+                                      "3,905 (2,004–6,987)",
+                                      "3,664 (1,462–7,533)",
+                                      "1,917 (112–4,547)",
+                                      "16,245 (10,863–22,756)"),
+  number_of_DALYs = c("69,508 (34,042–117,232)",
+                        "28,842 (23,313–35,303)",
+                        "58,350 (30,940–104,227)",
+                        "66,701 (27,890–128,543)",
+                        "20,890 (2,023–49,443)",
+                        "248,920 (178,693–336,239)"),
+  number_of_YLLs = c("41,306 (11,475–84,483)",
+                       "28,376 (22,983–34,714)",
+                       "49,578 (25,499–90,816)",
+                       "44,871 (18,043–92,915)",
+                       "19,937 (1,166–47,973)",
+                       "190,245 (131,301–264,573)"),
+  number_of_YLDs = c("27,539 (16,528–42,824)",
+                       "452 (352–580)",
+                       "8,787 (4,463–16,609)",
+                       "20,243 (8,095–40,522)",
+                       "977 (172–2,125)",
+                       "59,076 (40,263–84,578)")
+)
+
+colnames(breakdown) <- c(
+  "Type of HAI",
+  "Number of HAIs",
+  "Number of attributable deaths",
+  "Number of DALYs",
+  "Number of YLLs",
+  "Number of YLDs"
+)
 ```
 
 
+```{r}
+#| label: tbl-breakdown
+#| tbl-cap: Burden of healthcare-associated infections by type, Germany PPS 2011
 
+library(kableExtra)
 
-
+breakdown %>%
+ kable("html", align = "lrrrrr", escape = FALSE) %>%
+  kable_styling(full_width = TRUE, bootstrap_options = c("striped", "hover")) %>%
+  row_spec(nrow(breakdown), bold = TRUE, color = "black", background = "white") %>%
+  column_spec(1, bold = TRUE)
+```
 
