@@ -182,6 +182,9 @@ colnames(breakdown) <- c(
 
 ```{r}
 #| label: tbl-breakdown
+#| echo: false
+#| message: false
+#| warning: false
 #| tbl-cap: Burden of healthcare-associated infections by type, Germany PPS 2011
 
 library(kableExtra)

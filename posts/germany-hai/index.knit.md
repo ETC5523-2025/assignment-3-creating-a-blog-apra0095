@@ -1,0 +1,127 @@
+---
+title: "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?"
+author: "Izzul Fattah Aji Pratama"
+date: 2025-09-24
+categories: [Germany, HAI, burden, DALYs]
+bibliography: references.bib
+toc: true
+---
+
+## Problem
+
+Healthcare-associated infections (HAIs) remained a major burden on hospital systems by causing long-term disability, especially in Germany. From the 2011 ECDC point-prevalence survey, enabled Germany to be analysed using a new methodology, the Burden of Healthcare-Associated Infections (BHAI) R package. This method translates prevalence into disability adjusted life years (DALYs), combining years of life lost (YLL) and years lived with disability (YLD), providing a clearer picture of population health impact.
+
+The fundamental question is: How big is Germany's HAI burden compared with EU/EEA average and what infection type drives it?
+
+## Data
+
+-   **Source:** ECDC Point Prevalence Survey (PPS) 2011–2012 capturing five HAIs: Clostridioides Difficile Infection (CDI), Hospital Acquired Pneumonia (HAP), Bloodstream Infection (BSI), Urinary Tract Infection (UTI), Surgical Site Infection (SSI) with 46 hospitals and 9,626 patients in Germany and 132 hospitals and 41,539 patients for EU/EEA
+
+-   **Variables:** Infection type, patient demographics (age,sex), and clinical outcomes such as incidence, attributable deaths, and DALYs.
+
+-   **Method:** The method relied on converting prevalence to incidence with a modified Rhame–Sudderth model. DALYs were calculated as YLL + YLD, using infection specific probabilities of death. The analysis was performed with the BHAI R package, standardizes the workflow and makes the results reproducible. Because Germany did not report McCabe severity distributions, the numbers were substituted using EU/EEA values, causing moderate uncertainty.
+
+## Analysis
+
+Using Germany 2011 PPS, the problem was revealed, there were 478,222 HAI cases, resulting 16,245 attributable deaths and 248,920 DALYs. Adjusted to per 100,000 population sizes, Germany carried 308.2 DALYs and 20.1 deaths. Compared with EU/EEA, the average DALYs were 290 and 15.3 attributable deaths as shown in @fig-rates. This showed that Germany has higher infection burden compared to the region.
+
+
+
+
+::: {.cell layout-align="center"}
+::: {.cell-output-display}
+![Germany vs EU/EEA DALY and Death per 100k Population](index_files/figure-html/fig-rates-1.png){#fig-rates fig-align='center' width=960}
+:::
+:::
+
+
+Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs as shown in @fig-shares . This shows that the most severe infections are not necessarily the most frequent that happened.
+
+
+
+
+
+
+::: {.cell layout-align="center"}
+::: {.cell-output-display}
+![Share of cases vs DALYs by infection type (Germany, 2011)](index_files/figure-html/fig-shares-1.png){#fig-shares fig-align='center' width=960}
+:::
+:::
+
+
+
+
+
+
+::: {#tbl-breakdown .cell tbl-cap='Burden of healthcare-associated infections by type, Germany PPS 2011'}
+::: {.cell-output-display}
+`````{=html}
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Type of HAI </th>
+   <th style="text-align:right;"> Number of HAIs </th>
+   <th style="text-align:right;"> Number of attributable deaths </th>
+   <th style="text-align:right;"> Number of DALYs </th>
+   <th style="text-align:right;"> Number of YLLs </th>
+   <th style="text-align:right;"> Number of YLDs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> HAP </td>
+   <td style="text-align:right;"> 106,586 (83,618–137,476) </td>
+   <td style="text-align:right;"> 3,968 (1,107–8,164) </td>
+   <td style="text-align:right;"> 69,508 (34,042–117,232) </td>
+   <td style="text-align:right;"> 41,306 (11,475–84,483) </td>
+   <td style="text-align:right;"> 27,539 (16,528–42,824) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> SSI </td>
+   <td style="text-align:right;"> 93,222 (75,369–114,241) </td>
+   <td style="text-align:right;"> 2,328 (1,888–2,882) </td>
+   <td style="text-align:right;"> 28,842 (23,313–35,303) </td>
+   <td style="text-align:right;"> 28,376 (22,983–34,714) </td>
+   <td style="text-align:right;"> 452 (352–580) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> BSI </td>
+   <td style="text-align:right;"> 26,976 (16,520–42,252) </td>
+   <td style="text-align:right;"> 3,905 (2,004–6,987) </td>
+   <td style="text-align:right;"> 58,350 (30,940–104,227) </td>
+   <td style="text-align:right;"> 49,578 (25,499–90,816) </td>
+   <td style="text-align:right;"> 8,787 (4,463–16,609) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> UTI </td>
+   <td style="text-align:right;"> 214,150 (175,086–253,524) </td>
+   <td style="text-align:right;"> 3,664 (1,462–7,533) </td>
+   <td style="text-align:right;"> 66,701 (27,890–128,543) </td>
+   <td style="text-align:right;"> 44,871 (18,043–92,915) </td>
+   <td style="text-align:right;"> 20,243 (8,095–40,522) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> CDI </td>
+   <td style="text-align:right;"> 36,002 (25,108–49,934) </td>
+   <td style="text-align:right;"> 1,917 (112–4,547) </td>
+   <td style="text-align:right;"> 20,890 (2,023–49,443) </td>
+   <td style="text-align:right;"> 19,937 (1,166–47,973) </td>
+   <td style="text-align:right;"> 977 (172–2,125) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;color: black !important;background-color: white !important;font-weight: bold;"> All </td>
+   <td style="text-align:right;font-weight: bold;color: black !important;background-color: white !important;"> 478,222 (421,350–537,787) </td>
+   <td style="text-align:right;font-weight: bold;color: black !important;background-color: white !important;"> 16,245 (10,863–22,756) </td>
+   <td style="text-align:right;font-weight: bold;color: black !important;background-color: white !important;"> 248,920 (178,693–336,239) </td>
+   <td style="text-align:right;font-weight: bold;color: black !important;background-color: white !important;"> 190,245 (131,301–264,573) </td>
+   <td style="text-align:right;font-weight: bold;color: black !important;background-color: white !important;"> 59,076 (40,263–84,578) </td>
+  </tr>
+</tbody>
+</table>
+
+`````
+:::
+:::
+
+
+
