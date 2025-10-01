@@ -1,0 +1,8 @@
+/* css styles */
+:root{
+  --bs-body-bg:#white;
+  --bs-body-color:#222;
+}
+h1,h2,h3{ color:#steelblue; }
+.navbar{ box-shadow:0 2px 8px rgba(0,0,0,.06); }
+img{ border-radius:12px; }
