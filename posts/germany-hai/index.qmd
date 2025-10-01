@@ -130,8 +130,6 @@ x = "Infection Type", y = "Share (%)") +
     aspect.ratio     = 1)
 ```
 
-The pattern is clearly summarised in @tbl-breakdown . It confirms while UTI dominate the case numerically, HAP and BSI still drive the majority of DALYs. This finding emphasize a prevention strategy should focus not only on frequent infections, but also disease that cause severe effects afterwards.
-
 ```{r}
 #| label: Breakdown Infection Number
 #| include: false
@@ -172,22 +170,23 @@ breakdown <- data.frame(
 )
 
 colnames(breakdown) <- c(
-  "Type of HAI",
-  "Number of HAIs",
-  "Number of attributable deaths",
-  "Number of DALYs",
-  "Number of YLLs",
-  "Number of YLDs"
+                          "Type of HAI",
+                         "Number&nbsp;of&nbsp;HAIs",
+                         "Number&nbsp;of&nbsp;attributable&nbsp;deaths",
+                         "Number&nbsp;of&nbsp;DALYs",
+                         "Number&nbsp;of&nbsp;YLLs",
+                         "Number&nbsp;of&nbsp;YLDs"
 )
 ```
 
+The pattern is clearly summarized in @tbl-breakdown . It confirms while UTI dominate the case numerically, HAP and BSI still drive the majority of DALYs. This finding emphasize a prevention strategy should focus not only on frequent infections, but also disease that cause severe effects afterwards.
 
 ```{r}
 #| label: tbl-breakdown
 #| echo: false
 #| message: false
 #| warning: false
-#| tbl-cap: Burden of healthcare-associated infections by type, Germany PPS 2011
+#| tbl-cap: Burden of healthcare-associated infections by type, Germany PPS 2011 (Median Point Estimate, 95% UI)
 
 library(kableExtra)
 
@@ -199,3 +198,7 @@ breakdown %>%
 ```
 
 ## Conclusion
+
+This analysis shows that Germany’s HAI burden is above the EU/EEA average and also concentrated in a few key infection types, particularly pneumonia (HAP) and urinary tract infections (UTI). These infections drive the majority of DALYs and attributable deaths, suggesting that targeted prevention strategies in these areas could deliver the greatest benefits.
+
+The findings also emphasize the importance of advanced modelling approaches such as those implemented in the **BHAI R package**, which was used in the original study to estimate uncertainty intervals and standardize cross-country comparisons. By combaning both deaths and long-term disability, DALYs provide a fuller picture of the public health impact than mortality rates alone.
