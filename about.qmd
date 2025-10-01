@@ -7,8 +7,8 @@ about:
     - icon: github
       text: Github
       href: https://github.com/apra0095
-    - icon: file-textgit dtat
-      text: CV
+    - icon: linkedin
+      text: LinkedIn
       href: https://www.linkedin.com/in/aji-pratama-0b8508180/
 
 ---
