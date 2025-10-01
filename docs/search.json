@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Me",
-    "section": "",
-    "text": "Hi, I’m Izzul Fattah Aji Pratama (Aji), a Master of Business Analytics student at Monash University with a 3+ years experience in FMCG analytics & commercial at NielsenIQ and Philip Morris International.\nI enjoy turning messy data into clear decisions and visuals. On this site I share concise, well-documented analyses you can reuse and learn from."
-  },
-  {
     "objectID": "posts/germany-hai/index.html",
     "href": "posts/germany-hai/index.html",
     "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
@@ -40,5 +33,12 @@
     "title": "ETC5523 Blog Assessment",
     "section": "",
     "text": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?\n\n\n\nGermany\n\nHAI\n\nburden\n\nDALYs\n\n\n\n\n\n\n\n\n\nSep 24, 2025\n\n\nIzzul Fattah Aji Pratama\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Hi, I’m Izzul Fattah Aji Pratama (Aji), a Master of Business Analytics student at Monash University with a 3+ years experience in FMCG analytics & commercial at NielsenIQ and Philip Morris International.\nI enjoy turning messy data into clear decisions and visuals. On this site I share concise, well-documented analyses you can reuse and learn from."
   }
 ]

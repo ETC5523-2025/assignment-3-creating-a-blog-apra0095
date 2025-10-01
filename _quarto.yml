@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - index.qmd
+    - about.qmd
+    - "posts/*/index.qmd"
 
 website:
   title: "Izzul Fattah Aji Pratama - Communicating With Data"
@@ -9,10 +13,12 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/apra0095
+
 format:
   html:
     theme: cosmo
     css: styles.css
+
 
 
 
