@@ -67,8 +67,6 @@ ggplot(hai_rates, aes(x=region, y=value, fill=region)) +
 
 Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs as shown in @fig-shares . This shows that the most severe infections are not necessarily the most frequent that happened.
 
-The pattern is clearly summarised in @tbl-breakdown . It confirms while UTI dominate the case numerically, HAP and BSI still drive the majority of DALYs. This finding emphasize a prevention strategy should focus not only on frequent infections, but also disease that cause severe effects afterwards.
-
 ```{r}
 #| label: Count DALY and Cases
 #| message: false
@@ -131,6 +129,8 @@ x = "Infection Type", y = "Share (%)") +
     legend.position = "none",
     aspect.ratio     = 1)
 ```
+
+The pattern is clearly summarised in @tbl-breakdown . It confirms while UTI dominate the case numerically, HAP and BSI still drive the majority of DALYs. This finding emphasize a prevention strategy should focus not only on frequent infections, but also disease that cause severe effects afterwards.
 
 ```{r}
 #| label: Breakdown Infection Number
