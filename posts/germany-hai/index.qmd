@@ -5,6 +5,7 @@ date: 2025-09-24
 categories: [Germany, HAI, burden, DALYs]
 bibliography: references.bib
 toc: true
+image: hospital.png
 ---
 
 ## Problem
