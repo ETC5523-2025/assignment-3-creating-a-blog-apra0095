@@ -7,18 +7,31 @@ project:
     - "posts/*/index.qmd"
 
 website:
-  title: "Izzul Fattah Aji Pratama - Communicating With Data"
+  title: "Aji Pratama's Academic Blogpost"
   navbar:
     right:
       - about.qmd
       - icon: github
         href: https://github.com/apra0095
 
+  page-footer:
+    background: dark
+    left: |
+      **Izzul Fattah Aji Pratama**
+      Master of Business Analytics (Monash)
+      Communicating With Data
+      © 2025 Izzul Fattah Aji Pratama
+    right:
+      - icon: github
+        href: https://github.com/apra0095
+      - icon: envelope
+        href: apra0095@student.monash.edu
+      - text: "Melbourne, VIC, Australia"
+
 format:
   html:
     theme: cosmo
     css: styles.css
-
 
 
 
