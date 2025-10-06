@@ -17,9 +17,9 @@ website:
   page-footer:
     background: dark
     left: |
-      **Izzul Fattah Aji Pratama**
-      Master of Business Analytics (Monash)
-      Communicating With Data
+      **Izzul Fattah Aji Pratama**<br>
+      Master of Business Analytics (Monash University)<br>
+      Communicating With Data<br>
       © 2025 Izzul Fattah Aji Pratama
     right:
       - icon: github
