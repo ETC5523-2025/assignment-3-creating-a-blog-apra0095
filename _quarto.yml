@@ -25,7 +25,9 @@ website:
       - icon: github
         href: https://github.com/apra0095
       - icon: envelope
-        href: apra0095@student.monash.edu
+        href: mailto:apra0095@student.monash.edu
+      - icon: linkedin
+        href: https://www.linkedin.com/in/aji-pratama-0b8508180/
       - text: "Melbourne, VIC, Australia"
 
 format:

@@ -10,6 +10,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/aji-pratama-0b8508180/
+    - icon: envelope
+      text: Email
+      href: mailto:apra0095@student.monash.edu
 
 ---
 

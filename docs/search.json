@@ -32,7 +32,14 @@
     "href": "posts/germany-hai/index.html#conclusion",
     "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
     "section": "Conclusion",
-    "text": "Conclusion\nThis analysis shows that Germany’s HAI burden is above the EU/EEA average and also concentrated in a few key infection types, particularly pneumonia (HAP) and urinary tract infections (UTI). These infections drive the majority of DALYs and attributable deaths, suggesting that targeted prevention strategies in these areas could deliver the greatest benefits.\nThe findings also emphasize the importance of advanced modelling approaches such as those implemented in the BHAI R package, which was used in the original study to estimate uncertainty intervals and standardize cross-country comparisons. By combaning both deaths and long-term disability, DALYs provide a fuller picture of the public health impact than mortality rates alone."
+    "text": "Conclusion\nThis analysis shows that Germany’s HAI burden is above the EU/EEA average and also concentrated in a few key infection types, particularly pneumonia (HAP) and urinary tract infections (UTI). These infections drive the majority of DALYs and attributable deaths, suggesting that targeted prevention strategies in these areas could deliver the greatest benefits (Zacher et al, 2019).\nThe findings also emphasize the importance of advanced modelling approaches such as those implemented in the BHAI R package, which was used in the original study to estimate uncertainty intervals and standardize cross-country comparisons. By combaning both deaths and long-term disability, DALYs provide a fuller picture of the public health impact than mortality rates alone (WHO, 2022)."
+  },
+  {
+    "objectID": "posts/germany-hai/index.html#references",
+    "href": "posts/germany-hai/index.html#references",
+    "title": "How big is Germany’s HAI (Healthcare Associated Infections) burden and what drives it?",
+    "section": "References",
+    "text": "References\nZacher, B., et al. (2019). High burden of healthcare-associated infections in Germany, 2011–2012. Eurosurveillance, 24(46). https://doi.org/10.2807/1560-7917.ES.2019.24.46.1900135\n\nWorld Health Organization. (2022, October 18). Infection prevention and control in Germany. https://www.who.int/news-room/feature-stories/detail/infection-prevention-and-control-in-germany"
   },
   {
     "objectID": "index.html",
