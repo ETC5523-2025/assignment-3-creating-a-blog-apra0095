@@ -66,7 +66,7 @@ ggplot(hai_rates, aes(x=region, y=value, fill=region)) +
     aspect.ratio     = 1 )
 ```
 
-Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP and BSI together represent only 28% to total cases but contributed 51% of DALYs as shown in @fig-shares . This shows that the most severe infections are not necessarily the most frequent that happened.
+Although the number is high for Germany, the burden is not evenly distributed across infection types. UTI (Urinary Tract Infection) are the most common, representing 45% of all cases, but only accounted for 27% DALYs. In contrast, HAP (Health Acquired Pneumonia) and BSI (Bloodstream Infection) together represent only 28% to total cases but contributed 51% of DALYs as shown in @fig-shares . This shows that the most severe infections are not necessarily the most frequent that happened.
 
 ```{r}
 #| label: Count DALY and Cases
@@ -202,7 +202,7 @@ breakdown %>%
 
 This analysis shows that Germany’s HAI burden is above the EU/EEA average and also concentrated in a few key infection types, particularly pneumonia (HAP) and urinary tract infections (UTI). These infections drive the majority of DALYs and attributable deaths, suggesting that targeted prevention strategies in these areas could deliver the greatest benefits (Zacher et al, 2019).
 
-The findings also emphasize the importance of advanced modelling approaches such as those implemented in the **BHAI R package**, which was used in the original study to estimate uncertainty intervals and standardize cross-country comparisons. By combaning both deaths and long-term disability, DALYs provide a fuller picture of the public health impact than mortality rates alone (WHO, 2022).
+The findings also emphasize the importance of advanced modelling approaches such as those implemented in the BHAI R package, which was used in the original study to estimate uncertainty intervals and standardize cross-country comparisons. By combining both deaths and long-term disability, DALYs provide a fuller picture of the public health impact than mortality rates alone (WHO, 2022).
 
 ## References
 
